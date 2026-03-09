@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aulasandroid.idadeexercicio.ui.theme.IdadeExercicioTheme
@@ -59,10 +60,9 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
             mutableStateOf(0)
         }
 
-        var message: String = when {
-            idade > 0 -> "Você é MENOR de idade"
-            idade >= 18git a -> "Você é MAIOR de idade"
-            else -> ""
+        var message: String = when (idade){
+            in 0 .. 17 -> "Você é MENOR de idade"
+            else -> "Você é MAIOR de idade"
         }
 
         Column(
@@ -70,11 +70,13 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
                 Text(
                     text = "Qual é a sua idade?",
                     color = Color.Blue,
@@ -93,15 +95,18 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
                 verticalArrangement = Arrangement.spacedBy(20.dp)
 
             ) {
+
                 Text(
                     text = idade.toString(),
                     fontSize = 44.sp
                 )
+
                 Row(
                     modifier = Modifier,
                     horizontalArrangement = Arrangement.spacedBy(20.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+
                     Button(
                         onClick = {
                             if (idade > 0)
@@ -115,22 +120,25 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
                             contentColor = Color.White
                         )
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .size(60.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            Text(
-                                text = "-",
-                                fontSize = 36.sp
-                            )
-                        }
+                        Text(
+                            text = "-",
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+//                        Row(
+//                            modifier = Modifier
+//                                .size(60.dp),
+//                            verticalAlignment = Alignment.CenterVertically,
+//                            horizontalArrangement = Arrangement.Center
+//                        ) {
+//
+//                        }
                     }
 //                    Spacer(
 //                        modifier = Modifier
 //                            .width(20.dp)
 //                    )
+
                     Button(
                         onClick = {
                             if (idade < 180)
@@ -144,21 +152,24 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
                             contentColor = Color.White
                         )
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            Arrangement.Center,
-                            Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "+",
-                                fontSize = 36.sp
-                            )
-                        }
+                        Text(
+                            text = "+",
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+//                        Column(
+//                            modifier = Modifier
+//                                .fillMaxSize(),
+//                            Arrangement.Center,
+//                            Alignment.CenterHorizontally
+//                        ) {
+//
+//                        }
                     }
                 }
 
             }
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
