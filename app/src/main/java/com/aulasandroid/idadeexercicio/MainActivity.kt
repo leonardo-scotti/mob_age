@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +20,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,6 +55,16 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        var idade by remember {
+            mutableStateOf(0)
+        }
+
+        var message: String = when {
+            idade > 0 -> "Você é MENOR de idade"
+            idade >= 18git a -> "Você é MAIOR de idade"
+            else -> ""
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -79,18 +94,18 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
 
             ) {
                 Text(
-                    text = "17",
+                    text = idade.toString(),
                     fontSize = 44.sp
                 )
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier,
+                    horizontalArrangement = Arrangement.spacedBy(20.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Button(
                         onClick = {
-
+                            if (idade > 0)
+                                idade--
                         },
                         modifier = Modifier
                             .size(60.dp),
@@ -112,9 +127,14 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
                             )
                         }
                     }
+//                    Spacer(
+//                        modifier = Modifier
+//                            .width(20.dp)
+//                    )
                     Button(
                         onClick = {
-
+                            if (idade < 180)
+                            idade++
                         },
                         modifier = Modifier
                             .size(60.dp),
@@ -124,11 +144,11 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
                             contentColor = Color.White
                         )
                     ) {
-                        Row(
+                        Column(
                             modifier = Modifier
-                                .size(60.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
+                                .fillMaxSize(),
+                            Arrangement.Center,
+                            Alignment.CenterHorizontally
                         ) {
                             Text(
                                 text = "+",
@@ -137,6 +157,18 @@ fun ComponentsScreen(modifier: Modifier = Modifier) {
                         }
                     }
                 }
+
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = message,
+                    color = Color.Blue,
+                    fontSize = 28.sp
+                )
             }
         }
 
